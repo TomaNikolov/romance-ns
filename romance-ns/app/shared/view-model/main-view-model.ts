@@ -1,14 +1,18 @@
 import observable = require("data/observable");
 import observableArray = require("data/observable-array");
+import {DeviceItem} from "../models/device-item";
 
-export class ViewModelItem {
-    constructor(public title: string, public info: string) {}
-}
-
-var items = new observableArray.ObservableArray < ViewModelItem > ();
-for (var i = 0; i < 20; i++) {
-    items.push(new ViewModelItem("Item " + i, "This is the item with number " + i + "."));
-}
+var items = new observableArray.ObservableArray < DeviceItem > ();
+items.push(new DeviceItem({
+			"type": "actor",
+			"info": "Light dimmer",
+			"mode": "range",
+			"kind": "light",
+			"min": 0,
+			"max": 1023,
+			"queryParam": "A1",
+			"currentValue": "123"
+		}));
 
 export var mainViewModel = new observable.Observable();
 mainViewModel.set("items", items);

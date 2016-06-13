@@ -7,7 +7,7 @@ import vmModule = require("../../shared/view-model/main-view-model");
 import navigation = require("../../shared/navigation");
 
 export function pageLoaded(args: observable.EventData) {
-    page = < pages.Page > args.object;
+    var page = < pages.Page > args.object;
     page.bindingContext = vmModule.mainViewModel;
 }
 

@@ -1,7 +1,7 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd"
       navigatedTo="pageNavigatedTo">
   <StackLayout  xmlns="http://schemas.nativescript.org/tns.xsd">
-  <Label text="{{ title }}" class="detail-title"/>
-  <Label text="{{ info }}" class="info" textWrap="true"/>
+  <Label text="{{ info }}" class="detail-title"/>
+  <Label text="{{ value }}" class="info" textWrap="true"/>
 </StackLayout>
 </Page>
