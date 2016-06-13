@@ -1,5 +1,7 @@
+local S = {}
+
 -- start a web server.  Return the web server object
-function startWeb(cfg)
+function S:startWeb(cfg)
   -- define member variables
   local config = cfg
   local state = "inactive"
@@ -54,3 +56,5 @@ function startWeb(cfg)
   return { getStatus = getStatus, close = close }
 
 end
+
+return S
