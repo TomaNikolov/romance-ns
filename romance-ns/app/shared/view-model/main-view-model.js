@@ -1,4 +1,3 @@
-"use strict";
 var observable = require("data/observable");
 var observableArray = require("data/observable-array");
 var ViewModelItem = (function () {
@@ -7,7 +6,7 @@ var ViewModelItem = (function () {
         this.info = info;
     }
     return ViewModelItem;
-}());
+})();
 exports.ViewModelItem = ViewModelItem;
 var items = new observableArray.ObservableArray();
 for (var i = 0; i < 20; i++) {
