@@ -1,8 +1,10 @@
 Page {
-    background-color: #cfb6d7;
+    background-color: #f2d7ee;
+    color: #0e103d;
 }
+
 GridView {
-    background-color: #cfb6d7;
+    background-color: #f2d7ee;
 }
 
 /* icons */
@@ -10,20 +12,71 @@ GridView {
     font-family: 'Flaticon';
 }
 
+.icon--large {
+    font-size: 96;
+    text-align: center;
+    color: #d9bed5;
+}
+
 /* actionbar */
 .actionbar {
-    background-color: #6c2883;
+    background-color: #69306d;
+    color: #0e103d;
 }
 
 .actionbar__title {
     color: #fff;
 }
 
+.actionbar__item {
+    color: #0e103d;
+}
+
 /* listview */
 .listview {
-    background-color: #cfb6d7;
+    background-color: #f2d7ee;
 }
+
 .listview__tem {
-    background-color: #cfb6d7;
+    background-color: #f2d7ee;
 	padding: 20;
+}
+
+/* border */
+.border {
+    
+}
+
+.border--register {
+    border-width: 5;
+    border-radius: 50;
+    width: 100;
+    height: 100;
+    border-color: #bf80a5 ;
+    background-color: #a5668b;
+    margin-top: 20;
+}
+
+/* input */
+.input {
+    background-color: #d9bed5;
+    margin: 0 20 20 20;
+    padding: 15 10;
+    color: #0e103d;
+}
+
+/* button */
+.button {
+	color: #fff;
+}
+
+/* label */
+.label {
+    margin: 0 20 5 20;
+    opacity: 0.5;
+}
+
+/* spacer */
+.spacer {
+    height: 20;
 }

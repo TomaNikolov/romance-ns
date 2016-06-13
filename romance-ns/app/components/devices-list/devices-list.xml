@@ -5,14 +5,23 @@
             <StackLayout orientation="horizontal"
             	ios:horizontalAlignment="center"
             	android:horizontalAlignment="left">
-            	<Label text="&#xf11a; Romance {NS}" class="icon actionbar__title" />
+            	<Label text="Devices" class="actionbar__title" />
           	</StackLayout>
+            
             <ActionItem ios.position="right" text="Register" tap="onRegisterTap" />
         </ActionBar>
 	</Page.actionBar>
     
-    <GridLayout>
-        <ListView items="{{ items }}" itemTap="listViewItemTap" class="listview">
+    <GridLayout rows="auto, auto, auto, *">
+        <StackLayout class="spacer"></StackLayout>
+        
+        <StackLayout row="1">
+            <Label text="&#xf138;" class="icon icon--large" />
+        </StackLayout>
+        
+        <StackLayout class="spacer" row="2"></StackLayout>
+        
+        <ListView class="listview" row="3" items="{{ items }}" itemTap="listViewItemTap">
             <ListView.itemTemplate>
                 <GridLayout class="listview__tem">
                     <Label text="{{ info }}" />

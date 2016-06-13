@@ -9,8 +9,8 @@ function errorFunction()
 end
 
 connectToWiFi(
-    "iHome",
-    "7878787878787878",
+    "BW Esplanade",
+    "expo2015",
     sucessFunction,
     errorFunction,
     nil)
