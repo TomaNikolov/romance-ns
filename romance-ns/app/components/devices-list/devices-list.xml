@@ -5,7 +5,7 @@
 
     <ListView items="{{ items }}" itemTap="listViewItemTap" row="1">
       <ListView.itemTemplate>
-        <Label text="{{ title }}" class="listItem" />
+        <Label text="{{ info }}" class="listItem" />
       </ListView.itemTemplate>
     </ListView>
   </GridLayout>
