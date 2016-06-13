@@ -1,9 +1,7 @@
-"use strict";
-var vmModule = require("./main-view-model");
-// Event handler for Page "navigatedTo" event attached in details-page.xml
+var vmModule = require("../../shared/view-model/main-view-model");
 function pageNavigatedTo(args) {
     var page = args.object;
     page.bindingContext = vmModule.mainViewModel.get("selectedItem");
 }
 exports.pageNavigatedTo = pageNavigatedTo;
-//# sourceMappingURL=details-page.js.map
+//# sourceMappingURL=device-details.js.map
