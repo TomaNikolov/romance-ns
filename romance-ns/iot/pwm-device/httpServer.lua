@@ -1,22 +1,15 @@
--- start a web server.  Return the web server object
 function startWeb(cfg)
-  -- define member variables
   local config = cfg
   local state = "inactive"
   local server = net.createServer(net.TCP)
-
-  -- define functions
   local close = function()
     server:close()
     state = "inactive"
   end
-
   local getStatus = function()
     return state
   end
-
   local parseRequest = function(request)
-    -- the first line of the request is in the form METHOD URL PROTOCOL
     _, _, method, url = string.find(request, "(%a+)%s([^%s]+)")
     _, _, path, queryString = string.find(url, "([^%s]+)%?([^%s]+)")
     if queryString then
@@ -30,8 +23,6 @@ function startWeb(cfg)
     end
     return { method = method, url = url, path = path, query = query, queryString = queryString}
   end
-
-  -- start listening for requests
   server:listen(80,function(s)
     s:on("receive", function(s, rawRequest)
    local isopen = false
@@ -48,23 +39,11 @@ function startWeb(cfg)
       s:send(headers .. response)
     end)
    s:on("sent", function(s)
-                if not isopen then
-                   isopen = true
-                   file.open("led_gif.html", "r")
-                end
-                local data = file.read()
-                if data then
-                   s:send(data)
-                else
-                   file.close()
-                   s:close()
-                   s = nil
-                end
-             end)
+   s:close()
+   print("Print Connection")
+   s = nil
+   end)
   end)
-
   state = "listening"
-
   return { getStatus = getStatus, close = close }
-
 end

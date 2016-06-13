@@ -9,7 +9,7 @@
 			"min": 0,
 			"max": 1023,
 			"queryParam": "A1",
-			"currentValue": $$A1$$
+			"currentValue": {{A1}}
 		},
 		{
 			"type": "actor",
@@ -17,7 +17,7 @@
 			"mode": "toggle",
 			"kind": "light",
 			"queryParam": "D1",
-			"currentValue": $$D1$$
+			"currentValue": {{D1}}
 		}
 		
 	]
