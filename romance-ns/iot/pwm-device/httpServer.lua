@@ -40,13 +40,16 @@ function S:startWeb(cfg)
       request = parseRequest(rawRequest)
       print("Request received: ", request.method, request.url, request.path)
       if config.pages[request.path] then
-        response = config.pages[request.path](request)
+        response, contentType = config.pages[request.path](request)
         status = "200 OK"
       else
         response = "<html><body><p>" .. request.url .. " doesn't exist.</p></body></html>"
         status = "404 Not Found"
       end
-      headers = "HTTP/1.1 " .. status .. "\r\nConnection: keep-alive\r\nCache-Control: private, no-store\r\nContent-Length: " .. string.len(response) .. "\r\n\r\n"
+      headers = "HTTP/1.1 " .. status ..
+      	"\r\nConnection: keep-alive\r\nContent-Type:".. (contentType or  "text/html; charset=utf8") ..
+      	"\r\nCache-Control: private, no-store" .. 
+	"\r\nContent-Length: " .. string.len(response) .. "\r\n\r\n"
       s:send(headers .. response)
     end)
   end)
