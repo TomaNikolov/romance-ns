@@ -1,24 +1,15 @@
-local S = {}
-
--- start a web server.  Return the web server object
-function S:startWeb(cfg)
-  -- define member variables
+function startWeb(cfg)
   local config = cfg
   local state = "inactive"
   local server = net.createServer(net.TCP)
-
-  -- define functions
   local close = function()
     server:close()
     state = "inactive"
   end
-
   local getStatus = function()
     return state
   end
-
   local parseRequest = function(request)
-    -- the first line of the request is in the form METHOD URL PROTOCOL
     _, _, method, url = string.find(request, "(%a+)%s([^%s]+)")
     _, _, path, queryString = string.find(url, "([^%s]+)%?([^%s]+)")
     if queryString then
@@ -32,32 +23,27 @@ function S:startWeb(cfg)
     end
     return { method = method, url = url, path = path, query = query, queryString = queryString}
   end
-
-  -- start listening for requests
   server:listen(80,function(s)
     s:on("receive", function(s, rawRequest)
    local isopen = false
       request = parseRequest(rawRequest)
       print("Request received: ", request.method, request.url, request.path)
       if config.pages[request.path] then
-        response, contentType = config.pages[request.path](request)
+        response = config.pages[request.path](request)
         status = "200 OK"
       else
         response = "<html><body><p>" .. request.url .. " doesn't exist.</p></body></html>"
         status = "404 Not Found"
       end
-      headers = "HTTP/1.1 " .. status ..
-      	"\r\nConnection: keep-alive\r\nContent-Type:".. (contentType or  "text/html; charset=utf8") ..
-      	"\r\nCache-Control: private, no-store" .. 
-	"\r\nContent-Length: " .. string.len(response) .. "\r\n\r\n"
+      headers = "HTTP/1.1 " .. status .. "\r\nConnection: keep-alive\r\nCache-Control: private, no-store\r\nContent-Length: " .. string.len(response) .. "\r\n\r\n"
       s:send(headers .. response)
     end)
+   s:on("sent", function(s)
+   s:close()
+   print("Print Connection")
+   s = nil
+   end)
   end)
-
   state = "listening"
-
   return { getStatus = getStatus, close = close }
-
 end
-
-return S
