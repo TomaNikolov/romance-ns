@@ -15,3 +15,7 @@ export function listViewItemTap(args: listView.ItemEventData) {
     navigation.goToDeviceDetails();
     vmModule.mainViewModel.set("selectedItem", args.view.bindingContext);
 }
+
+export function onRegisterTap() {
+    navigation.goToRegisterDevice();
+}

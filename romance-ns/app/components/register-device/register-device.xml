@@ -1,0 +1,17 @@
+<Page xmlns="http://www.nativescript.org/tns.xsd">
+    <Page.actionBar>
+        <ActionBar class="actionbar">
+            <StackLayout orientation="horizontal"
+                ios:horizontalAlignment="center"
+                android:horizontalAlignment="left">
+                <Label text="&#xf11a; Romance {NS}" class="icon actionbar__title" />
+            </StackLayout>
+        </ActionBar>
+    </Page.actionBar>
+    
+    <GridLayout rows="*, auto, *">
+    	<StackLayout orientation="vertical">
+            <Button></Button>
+  		</StackLayout>
+    </GridLayout>
+</Page>

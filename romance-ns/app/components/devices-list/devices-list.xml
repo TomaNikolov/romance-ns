@@ -1,12 +1,23 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd"
       loaded="pageLoaded">
-  <GridLayout rows="auto, *">
-    <Label text="Items Page" class="title" />
-
-    <ListView items="{{ items }}" itemTap="listViewItemTap" row="1">
-      <ListView.itemTemplate>
-        <Label text="{{ info }}" class="listItem" />
-      </ListView.itemTemplate>
-    </ListView>
-  </GridLayout>
+	<Page.actionBar>
+        <ActionBar class="actionbar">
+            <StackLayout orientation="horizontal"
+            	ios:horizontalAlignment="center"
+            	android:horizontalAlignment="left">
+            	<Label text="&#xf11a; Romance {NS}" class="icon actionbar__title" />
+          	</StackLayout>
+            <ActionItem ios.position="right" text="Register" tap="onRegisterTap" />
+        </ActionBar>
+	</Page.actionBar>
+    
+    <GridLayout>
+        <ListView items="{{ items }}" itemTap="listViewItemTap" class="listview">
+            <ListView.itemTemplate>
+                <GridLayout class="listview__tem">
+                    <Label text="{{ info }}" />
+                </GridLayout>
+            </ListView.itemTemplate>
+        </ListView>
+    </GridLayout>
 </Page>

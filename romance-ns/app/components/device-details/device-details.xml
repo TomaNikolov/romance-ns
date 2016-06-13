@@ -1,7 +1,19 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd"
       navigatedTo="pageNavigatedTo">
-  <StackLayout  xmlns="http://schemas.nativescript.org/tns.xsd">
-  <Label text="{{ info }}" class="detail-title"/>
-  <Label text="{{ value }}" class="info" textWrap="true"/>
-</StackLayout>
+	<Page.actionBar>
+        <ActionBar class="actionbar">
+            <StackLayout orientation="horizontal"
+            	ios:horizontalAlignment="center"
+            	android:horizontalAlignment="left">
+            	<Label text="&#xf11a; Romance {NS}" class="icon actionbar__title" />
+          	</StackLayout>
+        </ActionBar>
+	</Page.actionBar>
+    
+	<GridLayout>
+    	<StackLayout>
+            <Label text="{{ info }}" />
+			<Label text="{{ value }}" />
+        </StackLayout>
+    </GridLayout>
 </Page>

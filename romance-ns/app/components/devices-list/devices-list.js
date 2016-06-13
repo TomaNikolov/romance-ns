@@ -10,4 +10,8 @@ function listViewItemTap(args) {
     vmModule.mainViewModel.set("selectedItem", args.view.bindingContext);
 }
 exports.listViewItemTap = listViewItemTap;
+function onRegisterTap() {
+    navigation.goToRegisterDevice();
+}
+exports.onRegisterTap = onRegisterTap;
 //# sourceMappingURL=devices-list.js.map
