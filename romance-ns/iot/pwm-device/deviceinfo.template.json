@@ -3,19 +3,21 @@
 	"actions": [
 		{
 			"type": "actor",
-			"info": "Light dimmer"
+			"info": "Light dimmer",
 			"mode": "range",
 			"kind": "light",
 			"min": 0,
 			"max": 1023,
-			"endpoint": "A1"
+			"queryParam": "A1",
+			"currentValue": $$A1$$
 		},
 		{
 			"type": "actor",
 			"info": "Light switch",
 			"mode": "toggle",
 			"kind": "light",
-			"endpoint": "D1"
+			"queryParam": "D1",
+			"currentValue": $$D1$$
 		}
 		
 	]
