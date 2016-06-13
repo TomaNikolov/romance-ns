@@ -1,0 +1,22 @@
+{
+	"device": "PWD Lights - NodeMCU with LUA",
+	"actions": [
+		{
+			"type": "actor",
+			"info": "Light dimmer"
+			"mode": "range",
+			"kind": "light",
+			"min": 0,
+			"max": 1023,
+			"endpoint": "A1"
+		},
+		{
+			"type": "actor",
+			"info": "Light switch",
+			"mode": "toggle",
+			"kind": "light",
+			"endpoint": "D1"
+		}
+		
+	]
+}
