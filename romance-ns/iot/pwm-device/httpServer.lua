@@ -1,5 +1,7 @@
+local S = {}
+
 -- start a web server.  Return the web server object
-function startWeb(cfg)
+function S:startWeb(cfg)
   -- define member variables
   local config = cfg
   local state = "inactive"
@@ -47,20 +49,6 @@ function startWeb(cfg)
       headers = "HTTP/1.1 " .. status .. "\r\nConnection: keep-alive\r\nCache-Control: private, no-store\r\nContent-Length: " .. string.len(response) .. "\r\n\r\n"
       s:send(headers .. response)
     end)
-   s:on("sent", function(s)
-                if not isopen then
-                   isopen = true
-                   file.open("led_gif.html", "r")
-                end
-                local data = file.read()
-                if data then
-                   s:send(data)
-                else
-                   file.close()
-                   s:close()
-                   s = nil
-                end
-             end)
   end)
 
   state = "listening"
@@ -68,3 +56,5 @@ function startWeb(cfg)
   return { getStatus = getStatus, close = close }
 
 end
+
+return S
