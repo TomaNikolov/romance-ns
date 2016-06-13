@@ -1,9 +1,9 @@
 {
-    "name": "tns-template-blank-ts",
+    "name": "tns-template-master-detail-ts",
     "main": "app.js",
     "version": "2.0.0",
     "author": "Telerik <support@telerik.com>",
-    "description": "Nativescript blank-ts project template",
+    "description": "Nativescript master-detail-ts project template",
     "license": "BSD",
     "keywords": [
         "telerik",
