@@ -24,9 +24,14 @@
         <ListView cssClass="listview" row="3" items="{{ items }}" itemTap="listViewItemTap"
                   separatorColor="#d3bcc0">
             <ListView.itemTemplate>
+<<<<<<< HEAD
                 <GridLayout cssClass="listview__item" columns="auto, 10, *">
                     <Label text="&#xf119;" cssClass="icon" />
                     <Label text="{{ info }}" col="2" />
+=======
+                <GridLayout class="listview__tem">
+                    <Label text="{{ displayName }}" />
+>>>>>>> branch 'master' of https://github.com/vladzagorski/romance-ns.git
                 </GridLayout>
             </ListView.itemTemplate>
         </ListView>

@@ -1,6 +1,7 @@
 var observable = require("data/observable");
 var observableArray = require("data/observable-array");
 var device_item_1 = require("../models/device-item");
+var master_item_1 = require("../models/master-item");
 var Sqlite = require("nativescript-sqlite");
 var _ = require("lodash");
 var DevicesViewModel = (function (_super) {
@@ -13,18 +14,25 @@ var DevicesViewModel = (function (_super) {
     }
     DevicesViewModel.prototype.getAndParseDevices = function () {
         var that = this;
-        return that.getStoredDevices()
+        return that.getStoredDevicesDetails()
             .then(function (storedDevices) {
             var items = new observableArray.ObservableArray();
             for (var _i = 0; _i < storedDevices.length; _i++) {
-                var device = storedDevices[_i];
-                items.push(device);
+                var deviceDetails = storedDevices[_i];
+                items.push(new master_item_1.MasterItem(deviceDetails.guid, deviceDetails.displayName, that.getChildren(deviceDetails)));
             }
             that.set("items", items);
         })
             .catch(function (e) {
             that.set("items", []);
         });
+    };
+    DevicesViewModel.prototype.getChildren = function (deviceDetails) {
+        var children = new observableArray.ObservableArray();
+        _.forEach(deviceDetails.items, function (child) {
+            children.push(new device_item_1.DeviceItem(child));
+        });
+        return children;
     };
     DevicesViewModel.prototype.addDevice = function (newDeviceInfo) {
         var that = this;
@@ -33,43 +41,41 @@ var DevicesViewModel = (function (_super) {
             return that.getDeviceDetails(newDeviceInfo)
                 .then(function (deviceDetails) {
                 var items = that.get("items");
-                items.push(new device_item_1.DeviceItem(deviceDetails));
-                return db.execSQL("insert into StoredDevices values (?, ?, ?, ?, ?, ?, ?, ?)", [
-                    deviceDetails.type,
-                    deviceDetails.info,
-                    deviceDetails.mode,
-                    deviceDetails.kind,
-                    deviceDetails.min,
-                    deviceDetails.max,
-                    deviceDetails.queryParam,
-                    deviceDetails.currentValue
+                items.push(new master_item_1.MasterItem(deviceDetails.guid, deviceDetails.displayName, that.getChildren(deviceDetails)));
+                return db.execSQL("insert into StoredDevices values (?, ?)", [
+                    newDeviceInfo.ipAddress,
+                    newDeviceInfo.displayName
                 ]);
             });
         });
     };
     DevicesViewModel.prototype.getDeviceDetails = function (newDeviceInfo) {
         return Promise.resolve({
-            "type": "actor",
-            "info": "Light dimmer",
-            "mode": "range",
-            "kind": "light",
-            "min": 0,
-            "max": 1023,
-            "queryParam": "A1",
-            "currentValue": "123"
+            "guid": "Something",
+            "displayName": newDeviceInfo.displayName,
+            "items": [{
+                    "type": "actor",
+                    "info": "Light dimmer",
+                    "mode": "range",
+                    "kind": "light",
+                    "min": 0,
+                    "max": 1023,
+                    "queryParam": "A1",
+                    "currentValue": "123" }]
         });
     };
-    DevicesViewModel.prototype.getStoredDevices = function () {
+    DevicesViewModel.prototype.getStoredDevicesDetails = function () {
         var that = this;
         return that.getDevicesDB()
             .then(function (db) {
             return db.all("select * from StoredDevices");
         })
             .then(function (dbDevices) {
-            return _.map(dbDevices, function (dbDevice) {
-                return new device_item_1.DeviceItem(dbDevice);
+            var promises = [];
+            _.forEach(dbDevices, function (dbDevice) {
+                promises.push(that.getDeviceDetails(dbDevice));
             });
-            return dbDevices;
+            return Promise.all(promises);
         });
     };
     DevicesViewModel.prototype.getDevicesDB = function () {
@@ -80,7 +86,7 @@ var DevicesViewModel = (function (_super) {
         return new Sqlite("storedDevices.sqlite")
             .then(function (db) {
             db.resultType(Sqlite.RESULTSASOBJECT);
-            return db.execSQL('create table if not exists StoredDevices (`type` text, `info` text, `mode` text, `kind` text, `min` numeric, `max` numeric, `queryParam` text, `currentValue` numeric)')
+            return db.execSQL('create table if not exists StoredDevices (`ipAddress` text, `displayName` text)')
                 .then(function () {
                 that._db = db;
                 return that._db;

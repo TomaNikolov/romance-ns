@@ -20,8 +20,8 @@
         <StackLayout cssClass="spacer" row="2"></StackLayout>
         
     	<StackLayout row="3">
-            <Label text="{{ info }}" />
-			<Label text="{{ value }}" />
+            <Label text="{{ displayName }}" />
+			<Label text="{{ items.length }}" />
         </StackLayout>
     </GridLayout>
 </Page>
