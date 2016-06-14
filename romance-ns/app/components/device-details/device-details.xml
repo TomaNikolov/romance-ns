@@ -29,8 +29,8 @@
                     <Label text="{{ info }}" col="2" color="#69306d" />
                     <Slider value="{{ currentValue }}" minValue="{{ min }}" maxValue="{{ max }}" col="2" row="2" cssClass="slider" visibility="{{ mode === 'range' ? 'visible': 'collapsed'}}"/>
                     <Switch col="2" row="2" checked="{{ currentBoolValue }}" cssClass="switch" visibility="{{ mode === 'toggle' ? 'visible': 'collapsed'}}" />
-                    <StackLayout col="2" row="2" orientation="horizontal">
-                   		<Label text="{{ currentValue }}" visibility="{{ mode === 'humidity' || mode === 'temp' ? 'visible' : 'collapsed' }}" />
+                    <StackLayout col="2" row="2" orientation="horizontal" visibility="{{ mode === 'humidity' || mode === 'temp' ? 'visible' : 'collapsed' }}">
+                   		<Label text="{{ currentValue }}" />
                         <Label text=" C" visibility="{{ mode === 'temp' ? 'visible' : 'collapsed' }}" />
                         <Label text=" %" visibility="{{ mode === 'humidity' ? 'visible' : 'collapsed' }}" />
                     </StackLayout>
