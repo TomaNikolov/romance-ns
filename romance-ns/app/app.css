@@ -22,6 +22,14 @@ GridView {
     color: #d9bed5;
 }
 
+.icon--range {
+    color: yellow;
+}
+
+.icon--toggle {
+    color: red;
+}
+
 /* actionbar */
 .actionbar {
     background-color: #69306d;

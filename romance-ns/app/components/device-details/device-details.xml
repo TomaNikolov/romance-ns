@@ -24,13 +24,16 @@
     	<ListView row="3" items="{{ items }}" cssClass="listview"
                   separatorColor="#d3bcc0">
             <ListView.itemTemplate>
-                <GridLayout cssClass="listview__item listview__item--detail" columns="auto, 15, *" rows="auto, auto, 15, auto, 15">
+                <GridLayout cssClass="listview__item listview__item--detail" columns="auto, 15, *" rows="auto, 15, auto">
                     <Label text="{{ actionIcon }}" cssClass="icon icon--middle" rowSpan="3" />
                     <Label text="{{ info }}" col="2" color="#69306d" />
-                    <Label text="{{ kind }}" col="2" row="1" opacity="0.5" fontSize="18" />
-                    <Slider value="{{ currentValue }}" minValue="{{ min }}" maxValue="{{ max }}" col="2" row="4" cssClass="slider" visibility="{{ mode === 'range' ? 'visible': 'collapsed'}}"/>
-                    <Switch col="2" row="4" checked="{{ currentBoolValue }}" cssClass="switch" visibility="{{ mode === 'toggle' ? 'visible': 'collapsed'}}"/>
-                    <Label text="{{ currentValue }}" visibility="{{ mode === 'humidity' || mode === 'temp' ? 'visible' : 'collapsed' }}" />
+                    <Slider value="{{ currentValue }}" minValue="{{ min }}" maxValue="{{ max }}" col="2" row="2" cssClass="slider" visibility="{{ mode === 'range' ? 'visible': 'collapsed'}}"/>
+                    <Switch col="2" row="2" checked="{{ currentBoolValue }}" cssClass="switch" visibility="{{ mode === 'toggle' ? 'visible': 'collapsed'}}" />
+                    <StackLayout col="2" row="2" orientation="horizontal">
+                   		<Label text="{{ currentValue }}" visibility="{{ mode === 'humidity' || mode === 'temp' ? 'visible' : 'collapsed' }}" />
+                        <Label text=" C" visibility="{{ mode === 'temp' ? 'visible' : 'collapsed' }}" />
+                        <Label text=" %" visibility="{{ mode === 'humidity' ? 'visible' : 'collapsed' }}" />
+                    </StackLayout>
                 </GridLayout>
             </ListView.itemTemplate>
         </ListView>
