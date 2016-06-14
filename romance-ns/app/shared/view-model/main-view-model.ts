@@ -29,7 +29,7 @@ class DevicesViewModel extends observable.Observable {
             	var items = new observableArray.ObservableArray < MasterItem > ();
             
             	for (let deviceDetails of storedDevices) {
-                    items.push(new MasterItem(deviceDetails.guid, deviceDetails.displayName, that.getChildren(deviceDetails)))
+                    items.push(new MasterItem(deviceDetails.guid, deviceDetails.displayName, deviceDetails.ipAddress, that.getChildren(deviceDetails)))
                 }
             
             	that.set("items", items);
@@ -59,7 +59,7 @@ class DevicesViewModel extends observable.Observable {
                 	.then(function(deviceDetails) {
                     	var items = that.get("items");
                     
-                    	items.push(new MasterItem(deviceDetails.guid, deviceDetails.displayName, that.getChildren(deviceDetails)));
+                    	items.push(new MasterItem(deviceDetails.guid, deviceDetails.displayName, deviceDetails.ipAddress, that.getChildren(deviceDetails)));
                     
                     	return db.execSQL("insert into StoredDevices values (?, ?)", [
                             newDeviceInfo.ipAddress,
@@ -70,19 +70,17 @@ class DevicesViewModel extends observable.Observable {
     }
     
 	getDeviceDetails(newDeviceInfo: NewDeviceItem) {
-        return Promise.resolve({
-            	"guid": "Something",
-            	"displayName": newDeviceInfo.displayName,
-            	"items": [{
-                    "type": "actor",
-                    "info": "Light dimmer",
-                    "mode": "range",
-                    "kind": "light",
-                    "min": 0,
-                    "max": 1023,
-                    "queryParam": "A1",
-                    "currentValue": "123"}]
-            });
+         return requester.get(newDeviceInfo.ipAddress)
+                .then(function (response) {
+                    var deviceInfo = {
+                        guild: response.device,
+                        displayName: newDeviceInfo.displayName,
+                        ipAddress: newDeviceInfo.ipAddress,
+                        items: response.actions
+                    }
+
+                    return Promise.resolve(deviceInfo);
+                });
     }
 
     getStoredDevicesDetails() {
