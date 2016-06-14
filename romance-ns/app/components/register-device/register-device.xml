@@ -1,4 +1,5 @@
-<Page xmlns="http://www.nativescript.org/tns.xsd">
+<Page xmlns="http://www.nativescript.org/tns.xsd"
+      navigatedTo="pageNavigatedTo">
     <Page.actionBar>
         <ActionBar class="actionbar">
             <StackLayout orientation="horizontal"
@@ -11,7 +12,8 @@
     
     <GridLayout rows="*, auto, *">
     	<StackLayout orientation="vertical">
-            <Button></Button>
+            <TextView text="{{ newDeviceIPAddress }}" />
+            <Button text="Add Device" tap="onAddDevice"></Button>
   		</StackLayout>
     </GridLayout>
 </Page>
