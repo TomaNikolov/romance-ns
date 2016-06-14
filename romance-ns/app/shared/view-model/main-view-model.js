@@ -54,7 +54,7 @@ var DevicesViewModel = (function (_super) {
         var that = this;
         return that.getDeviceDetails(device)
             .then(function (deviceDetails) {
-            device.set("items", deviceDetails.items);
+            device.set("items", that.getChildren(deviceDetails));
         });
     };
     DevicesViewModel.prototype.getDeviceDetails = function (newDeviceInfo) {
