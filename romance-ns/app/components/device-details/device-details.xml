@@ -1,23 +1,23 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd"
       navigatedTo="pageNavigatedTo">
 	<Page.actionBar>
-        <ActionBar class="actionbar">
+        <ActionBar cssClass="actionbar">
             <StackLayout orientation="horizontal"
             	ios:horizontalAlignment="center"
             	android:horizontalAlignment="left">
-            	<Label text="Device Details" class="actionbar__title" />
+            	<Label text="Device Details" cssClass="actionbar__title" />
           	</StackLayout>
         </ActionBar>
 	</Page.actionBar>
     
 	<GridLayout rows="auto, auto, auto, *">
-        <StackLayout class="spacer"></StackLayout>
+        <StackLayout cssClass="spacer"></StackLayout>
         
         <StackLayout row="1">
-            <Label text="&#xf13d;" class="icon icon--large" />
+            <Label text="&#xf13d;" cssClass="icon icon--large" />
         </StackLayout>
         
-        <StackLayout class="spacer" row="2"></StackLayout>
+        <StackLayout cssClass="spacer" row="2"></StackLayout>
         
     	<StackLayout row="3">
             <Label text="{{ info }}" />

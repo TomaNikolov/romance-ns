@@ -35,9 +35,10 @@ GridView {
 /* listview */
 .listview {
     background-color: #f2d7ee;
+    margin: 0;
 }
 
-.listview__tem {
+.listview__item {
     background-color: #f2d7ee;
 	padding: 20;
 }
