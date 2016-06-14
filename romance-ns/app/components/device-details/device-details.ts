@@ -6,3 +6,7 @@ export function pageNavigatedTo(args: observable.EventData) {
     var page = < pages.Page > args.object;
     page.bindingContext = vmModule.mainViewModel.get("selectedItem");
 }
+
+export function onRefreshTap() {
+    
+}

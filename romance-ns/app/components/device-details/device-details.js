@@ -4,4 +4,7 @@ function pageNavigatedTo(args) {
     page.bindingContext = vmModule.mainViewModel.get("selectedItem");
 }
 exports.pageNavigatedTo = pageNavigatedTo;
+function onRefreshTap() {
+}
+exports.onRefreshTap = onRefreshTap;
 //# sourceMappingURL=device-details.js.map

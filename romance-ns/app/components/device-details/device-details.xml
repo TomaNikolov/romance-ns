@@ -7,6 +7,8 @@
             	android:horizontalAlignment="left">
             	<Label text="{{ displayName }}" cssClass="actionbar__title" />
           	</StackLayout>
+            
+            <ActionItem ios.position="right" text="Refresh" tap="onRefreshTap" />
         </ActionBar>
 	</Page.actionBar>
     
