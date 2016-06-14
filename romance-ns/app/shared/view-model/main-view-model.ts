@@ -74,7 +74,7 @@ class DevicesViewModel extends observable.Observable {
         
         return that.getDeviceDetails(device)
         	.then(function(deviceDetails) {
-        		device.set("items", deviceDetails.items);
+        		device.set("items", that.getChildren(deviceDetails));
         	});
     }
     
