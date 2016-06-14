@@ -1,8 +1,11 @@
 import {ActionType} from "../enums/action-type";
 import {ActionMode} from "../enums/action-mode";
+import observable = require("data/observable");
 
-export class DeviceItem {
+export class DeviceItem extends observable.Observable {
     constructor(fromObject:Object) {
+        super();
+        
         for(var propertyName in fromObject) {
             this[propertyName] = fromObject[propertyName];
         }
@@ -48,12 +51,22 @@ export class DeviceItem {
         this._queryParam = queryParam;
     }
 
-	private _value:Number = 0;
-    get value():Number {
-        return this._value;
+	private _currentValue:Number = 0;
+    get currentValue():Number {
+        return this._currentValue;
     }
-    set value(value:Number) {
-        this._value = value;
+    set currentValue(currentValue:Number) {
+        this._currentValue = currentValue;
+        
+        this.set("currentBoolValue", !!currentValue);
+    }
+
+	private _currentBoolValue:Number = 0;
+    get currentBoolValue():Number {
+        return this._currentBoolValue;
+    }
+    set currentBoolValue(currentBoolValue:Number) {
+        this._currentBoolValue = currentBoolValue;
     }
 
 	private _minValue:Number = Number.NaN;

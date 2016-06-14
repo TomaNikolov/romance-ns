@@ -29,7 +29,7 @@
                     <Label text="{{ info }}" col="2" color="#69306d" />
                     <Label text="{{ kind }}" col="2" row="1" opacity="0.5" fontSize="18" />
                     <Slider value="{{ currentValue }}" minValue="{{ min }}" maxValue="{{ max }}" col="2" row="4" cssClass="slider" visibility="{{ mode === 'range' ? 'visible': 'collapsed'}}"/>
-                    <Switch col="2" row="4" checked="{{ !!currentValue }}" cssClass="switch" visibility="{{ mode === 'toggle' ? 'visible': 'collapsed'}}"/>
+                    <Switch col="2" row="4" checked="{{ currentBoolValue }}" cssClass="switch" visibility="{{ mode === 'toggle' ? 'visible': 'collapsed'}}"/>
                 </GridLayout>
             </ListView.itemTemplate>
         </ListView>

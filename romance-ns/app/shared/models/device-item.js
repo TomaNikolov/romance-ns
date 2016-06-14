@@ -1,13 +1,17 @@
 var action_type_1 = require("../enums/action-type");
 var action_mode_1 = require("../enums/action-mode");
-var DeviceItem = (function () {
+var observable = require("data/observable");
+var DeviceItem = (function (_super) {
+    __extends(DeviceItem, _super);
     function DeviceItem(fromObject) {
+        _super.call(this);
         this._type = action_type_1.ActionType.actor;
         this._info = "";
         this._mode = action_mode_1.ActionMode.toggle;
         this._kind = "";
         this._queryParam = "";
-        this._value = 0;
+        this._currentValue = 0;
+        this._currentBoolValue = 0;
         this._minValue = Number.NaN;
         this._maxValue = Number.NaN;
         for (var propertyName in fromObject) {
@@ -64,12 +68,23 @@ var DeviceItem = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(DeviceItem.prototype, "value", {
+    Object.defineProperty(DeviceItem.prototype, "currentValue", {
         get: function () {
-            return this._value;
+            return this._currentValue;
         },
-        set: function (value) {
-            this._value = value;
+        set: function (currentValue) {
+            this._currentValue = currentValue;
+            this.set("currentBoolValue", !!currentValue);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DeviceItem.prototype, "currentBoolValue", {
+        get: function () {
+            return this._currentBoolValue;
+        },
+        set: function (currentBoolValue) {
+            this._currentBoolValue = currentBoolValue;
         },
         enumerable: true,
         configurable: true
@@ -113,6 +128,6 @@ var DeviceItem = (function () {
         configurable: true
     });
     return DeviceItem;
-})();
+})(observable.Observable);
 exports.DeviceItem = DeviceItem;
 //# sourceMappingURL=device-item.js.map
