@@ -3,6 +3,7 @@ import dialogs = require("ui/dialogs");
 import observableArray = require("data/observable-array");
 import {DeviceItem} from "../models/device-item";
 import {NewDeviceItem} from "../../shared/models/new-device";
+import {MasterItem} from "../models/master-item";
 import requester = require("./../requester");
 import http = require("http");
 
@@ -23,12 +24,12 @@ class DevicesViewModel extends observable.Observable {
     getAndParseDevices() {
         var that = this;
         
-        return that.getStoredDevices()
+        return that.getStoredDevicesDetails()
         	.then(function(storedDevices) {
-            	var items = new observableArray.ObservableArray < DeviceItem > ();
+            	var items = new observableArray.ObservableArray < MasterItem > ();
             
-            	for (let device of storedDevices) {
-                    items.push(device);
+            	for (let deviceDetails of storedDevices) {
+                    items.push(new MasterItem(deviceDetails.guid, deviceDetails.displayName, that.getChildren(deviceDetails)))
                 }
             
             	that.set("items", items);
@@ -36,6 +37,16 @@ class DevicesViewModel extends observable.Observable {
         	.catch(function(e) {
             	that.set("items", []);
         	});
+    }
+
+	getChildren(deviceDetails:any) {
+        var children = new observableArray.ObservableArray < DeviceItem >();
+        
+        _.forEach(deviceDetails.items, function(child) {
+            children.push(new DeviceItem(child));
+        });
+        
+        return children;
     }
     
     addDevice(newDeviceInfo: NewDeviceItem) {
@@ -48,16 +59,11 @@ class DevicesViewModel extends observable.Observable {
                 	.then(function(deviceDetails) {
                     	var items = that.get("items");
                     
-                    	items.push(new DeviceItem(deviceDetails));
-                    	return db.execSQL("insert into StoredDevices values (?, ?, ?, ?, ?, ?, ?, ?)", [
-                            deviceDetails.type,
-                            deviceDetails.info,
-                            deviceDetails.mode,
-                            deviceDetails.kind,
-                            deviceDetails.min,
-                            deviceDetails.max,
-                            deviceDetails.queryParam,
-                            deviceDetails.currentValue
+                    	items.push(new MasterItem(deviceDetails.guid, deviceDetails.displayName, that.getChildren(deviceDetails)));
+                    
+                    	return db.execSQL("insert into StoredDevices values (?, ?)", [
+                            newDeviceInfo.ipAddress,
+                            newDeviceInfo.displayName
                         ]);
                 	});
         	});
@@ -65,18 +71,21 @@ class DevicesViewModel extends observable.Observable {
     
 	getDeviceDetails(newDeviceInfo: NewDeviceItem) {
         return Promise.resolve({
-                "type": "actor",
-                "info": "Light dimmer",
-                "mode": "range",
-                "kind": "light",
-                "min": 0,
-                "max": 1023,
-                "queryParam": "A1",
-                "currentValue": "123"
+            	"guid": "Something",
+            	"displayName": newDeviceInfo.displayName,
+            	"items": [{
+                    "type": "actor",
+                    "info": "Light dimmer",
+                    "mode": "range",
+                    "kind": "light",
+                    "min": 0,
+                    "max": 1023,
+                    "queryParam": "A1",
+                    "currentValue": "123"}]
             });
     }
 
-    getStoredDevices() {
+    getStoredDevicesDetails() {
         var that = this;
 
         return that.getDevicesDB()
@@ -84,11 +93,13 @@ class DevicesViewModel extends observable.Observable {
             	return db.all("select * from StoredDevices");
         	})
         	.then(function(dbDevices) {
-            	return _.map(dbDevices, function(dbDevice) {
-                    return new DeviceItem(dbDevice);
+            	var promises = [];
+            
+            	_.forEach(dbDevices, function(dbDevice) {
+                    promises.push(that.getDeviceDetails(dbDevice));
                 });
             
-            	return dbDevices;
+            	return Promise.all(promises);
         	});
     }
     
@@ -103,7 +114,7 @@ class DevicesViewModel extends observable.Observable {
             .then(function(db) {
             	db.resultType(Sqlite.RESULTSASOBJECT);
             
-            	return db.execSQL('create table if not exists StoredDevices (`type` text, `info` text, `mode` text, `kind` text, `min` numeric, `max` numeric, `queryParam` text, `currentValue` numeric)')
+            	return db.execSQL('create table if not exists StoredDevices (`ipAddress` text, `displayName` text)')
                     .then(function() {
                     	that._db = db;
             	

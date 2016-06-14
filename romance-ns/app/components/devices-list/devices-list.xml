@@ -24,7 +24,7 @@
         <ListView class="listview" row="3" items="{{ items }}" itemTap="listViewItemTap">
             <ListView.itemTemplate>
                 <GridLayout class="listview__tem">
-                    <Label text="{{ info }}" />
+                    <Label text="{{ displayName }}" />
                 </GridLayout>
             </ListView.itemTemplate>
         </ListView>

@@ -21,10 +21,10 @@
         
     	<StackLayout orientation="vertical" row="3">
             <Label text="Enter Device IP" class="label"></Label>
-			<TextField text="{{ newDeviceIPAddress }}" class="input" />
+			<TextField text="{{ ipAddress }}" class="input" />
             
             <Label text="Enter Device Name" class="label"></Label>
-            <TextField text="" class="input" />
+            <TextField text="{{ displayName }}" class="input" />
             
             <Border class="border border--register">
             	<Button text="Register" class="button" tap="onAddDevice"></Button>
