@@ -1,5 +1,5 @@
 {
-	"device": "PWD Lights - NodeMCU with LUA",
+	"device": "Bedroom - Lights and Fountain",
 	"actions": [
 		{
 			"type": "actor",
@@ -18,7 +18,14 @@
 			"kind": "light",
 			"queryParam": "D1",
 			"currentValue": {{D1}}
+		},
+		{
+			"type": "actor",
+			"info": "Fountain switch",
+			"mode": "toggle",
+			"kind": "pump",
+			"queryParam": "F1",
+			"currentValue": {{F1}}
 		}
-		
 	]
 }
