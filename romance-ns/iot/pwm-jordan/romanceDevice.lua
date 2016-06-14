@@ -1,8 +1,9 @@
-require("httpServer");
-pwm = require("pwm");
+require("httpServer")
+pwm = require("pwm")
 
 A1_PIN = 1;
 D1_PIN = 2;
+DHT_PIN = 6;
 UP_VALUE = 1023;
 A1 = 0;
 D1 = 0;
@@ -22,11 +23,30 @@ function readFile(filename)
 	return(txt)
 end
 
+function readSensor()
+    local status, temp, humi, temp_dec, humi_dec = dht.read(DHT_PIN)
+
+    if status == dht.OK then
+        --print("DHT Temperature:"..temp.."; ".." Humidity:"..humi)
+        return temp, humi
+    elseif status == dht.ERROR_CHECKSUM then
+        print( "DHT Checksum error." )
+        return -1, -1
+    elseif status == dht.ERROR_TIMEOUT then
+        print( "DHT timed out." )
+        return -1, -2
+    end
+end
+
 function getDeviceInfo () 
     local X = readFile("deviceinfo.template.json");
-    tmr.wdclr();
+	local temp, humi = readSensor()
+    
+	tmr.wdclr();
     X = X:gsub("{{A1}}", A1);
     X = X:gsub("{{D1}}", D1);
+	X = X:gsub("{{T1}}", temp);
+    X = X:gsub("{{H1}}", humi);
     return X, "application/json"
 end
 

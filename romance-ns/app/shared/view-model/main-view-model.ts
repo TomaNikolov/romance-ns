@@ -3,6 +3,8 @@ import dialogs = require("ui/dialogs");
 import observableArray = require("data/observable-array");
 import {DeviceItem} from "../models/device-item";
 import {NewDeviceItem} from "../../shared/models/new-device";
+import requester = require("./../requester");
+import http = require("http");
 
 var Sqlite = require( "nativescript-sqlite");
 var _ = require("lodash");

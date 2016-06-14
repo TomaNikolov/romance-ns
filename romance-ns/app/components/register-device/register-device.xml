@@ -5,15 +5,30 @@
             <StackLayout orientation="horizontal"
                 ios:horizontalAlignment="center"
                 android:horizontalAlignment="left">
-                <Label text="&#xf11a; Romance {NS}" class="icon actionbar__title" />
+            	<Label text="Register Device" class="actionbar__title" />
             </StackLayout>
         </ActionBar>
     </Page.actionBar>
     
-    <GridLayout rows="*, auto, *">
-    	<StackLayout orientation="vertical">
-            <TextView text="{{ newDeviceIPAddress }}" />
-            <Button text="Add Device" tap="onAddDevice"></Button>
+    <GridLayout rows="auto, auto, auto, *">
+        <StackLayout class="spacer"></StackLayout>
+        
+        <StackLayout row="1">
+            <Label text="&#xf139;" class="icon icon--large" />
+        </StackLayout>
+        
+        <StackLayout row="2" class="spacer"></StackLayout>
+        
+    	<StackLayout orientation="vertical" row="3">
+            <Label text="Enter Device IP" class="label"></Label>
+			<TextField text="{{ newDeviceIPAddress }}" class="input" />
+            
+            <Label text="Enter Device Name" class="label"></Label>
+            <TextField text="" class="input" />
+            
+            <Border class="border border--register">
+            	<Button text="Register" class="button" tap="onAddDevice"></Button>
+            </Border>
   		</StackLayout>
     </GridLayout>
 </Page>

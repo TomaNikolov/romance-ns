@@ -1,4 +1,5 @@
 import pages = require("ui/page");
+import textField = require("ui/text-field");
 import observable = require("data/observable");
 import vmModule = require("../../shared/view-model/main-view-model");
 import {NewDeviceItem} from "../../shared/models/new-device";
