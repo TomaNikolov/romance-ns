@@ -5,7 +5,7 @@
             <StackLayout orientation="horizontal"
             	ios:horizontalAlignment="center"
             	android:horizontalAlignment="left">
-            	<Label text="Device Details" cssClass="actionbar__title" />
+            	<Label text="{{ displayName }}" cssClass="actionbar__title" />
           	</StackLayout>
         </ActionBar>
 	</Page.actionBar>
@@ -19,17 +19,17 @@
         
         <StackLayout cssClass="spacer" row="2"></StackLayout>
         
-    	<StackLayout row="3">
-            <Label text="{{ displayName }}" />
-            <ListView class="listview" row="3" items="{{ items }}">
-                <ListView.itemTemplate>
-                	<StackLayout row="3">
-                        <Label text="{{ actionIcon }}" cssClass="icon" />
-                        <Label text="{{ info }}" />
-                        <Label text="{{ currentValue }}" />
-                  	</StackLayout>
-                </ListView.itemTemplate>
-            </ListView>
-        </StackLayout>
+    	<ListView row="3" items="{{ items }}" cssClass="listview"
+                  separatorColor="#d3bcc0">
+            <ListView.itemTemplate>
+                <GridLayout cssClass="listview__item listview__item--detail" columns="auto, 15, *" rows="auto, auto, 15, auto, 15">
+                    <Label text="{{ actionIcon }}" cssClass="icon icon--middle" rowSpan="3" />
+                    <Label text="{{ info }}" col="2" color="#69306d" />
+                    <Label text="{{ kind }}" col="2" row="1" opacity="0.5" fontSize="18" />
+<!--                     <Slider value="{{ currentValue }}" col="2" row="4" cssClass="slider" /> -->
+                    <Switch col="2" row="4" checked="{{ currentValue }}" cssClass="switch" />
+                </GridLayout>
+            </ListView.itemTemplate>
+        </ListView>
     </GridLayout>
 </Page>

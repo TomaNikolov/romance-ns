@@ -47,7 +47,8 @@ GridView {
 	padding: 20;
 }
 
-.listview__item--master {
+.listview__item--master,
+.listview__item--detail {
     font-size: 24;
 }
 
@@ -93,4 +94,18 @@ GridView {
 /* spacer */
 .spacer {
     height: 20;
+}
+
+/* slider */
+.slider {
+    background-color: #bf80a5;
+    color: #a5668b;
+}
+
+/* switch */
+.switch {
+    background-color: #bf80a5;
+    border-color: #a5668b;
+    color: #a5668b;
+    horizontal-align: left;
 }

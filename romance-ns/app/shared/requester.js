@@ -2,7 +2,6 @@ var http = require("http");
 var dialogs = require("ui/dialogs");
 function get(url) {
     return new Promise(function (resolve, reject) {
-        dialogs.alert(url);
         http.request({
             url: "http://" + url,
             method: 'GET',
