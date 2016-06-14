@@ -12,6 +12,10 @@ GridView {
     font-family: 'Flaticon';
 }
 
+.icon--middle {
+	font-size: 48;    
+}
+
 .icon--large {
     font-size: 96;
     text-align: center;
@@ -41,6 +45,10 @@ GridView {
 .listview__item {
     background-color: #f2d7ee;
 	padding: 20;
+}
+
+.listview__item--master {
+    font-size: 24;
 }
 
 /* border */

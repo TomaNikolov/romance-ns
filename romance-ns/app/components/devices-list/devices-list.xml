@@ -24,9 +24,10 @@
         <ListView cssClass="listview" row="3" items="{{ items }}" itemTap="listViewItemTap"
                   separatorColor="#d3bcc0">
             <ListView.itemTemplate>
-                <GridLayout cssClass="listview__item" columns="auto, 10, *">
-                    <Label text="&#xf119;" cssClass="icon" />
-                    <Label text="{{ displayName }}" col="2" />
+                <GridLayout cssClass="listview__item listview__item--master" columns="auto, 15, *" rows="auto, auto">
+                    <Label text="&#xf119;" cssClass="icon icon--middle" rowSpan="2" />
+                    <Label text="{{ displayName }}" col="2" color="#69306d" />
+                    <Label text="192.168.0.1" col="2" row="1" opacity="0.5" fontSize="18" />
                 </GridLayout>
             </ListView.itemTemplate>
         </ListView>
