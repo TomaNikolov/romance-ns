@@ -3,13 +3,17 @@ pwm = require("pwm");
 
 A1_PIN = 1;
 D1_PIN = 2;
+F1_PIN = 3;
 UP_VALUE = 1023;
 A1 = 0;
 D1 = 0;
+F1 = 0;
 pwm.setup(1,1000,0);
 pwm.start(1);
 pwm.setup(2,1000,0);
 pwm.start(2);
+pwm.setup(3,1000,0);
+pwm.start(3);
 
 function readFile(filename)
 	file.open(filename,'r')
@@ -27,6 +31,7 @@ function getDeviceInfo ()
     tmr.wdclr();
     X = X:gsub("{{A1}}", A1);
     X = X:gsub("{{D1}}", D1);
+    X = X:gsub("{{F1}}", F1);
     return X, "application/json"
 end
 
@@ -47,6 +52,16 @@ function setValue(request)
 			    pwm.setduty(D1_PIN,UP_VALUE);
 		    else
 			    pwm.setduty(D1_PIN, 0);
+		    end
+                end
+	end
+	if (request.query["F1"]) then
+                F1 = tonumber(request.query["F1"]);
+                if F1~= nil and F1 >= 0 and F1 <1024 then
+		    if (F1 ~= 0) then
+			    pwm.setduty(F1_PIN,UP_VALUE);
+		    else
+			    pwm.setduty(F1_PIN, 0);
 		    end
                 end
 	end

@@ -1,8 +1,16 @@
-wifi.sta.config("BW Esplanade","expo2015")
-wifi.sta.connect()
-while wifi.sta.status() >= 5 do
-  tmr.delay(1000000)
+require("connect")
+
+function sucessFunction()
+    dofile("romanceDevice.lua")
 end
-print(wifi.sta.status())
-print(wifi.sta.getip())
-dofile("romanceDevice.lua")
+
+function errorFunction()
+    print("no wifi connection")
+end
+
+connectToWiFi(
+    "BW Esplanade",
+    "expo2015",
+    sucessFunction,
+    errorFunction,
+    nil)

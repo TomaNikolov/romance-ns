@@ -1,6 +1,6 @@
 function connectToWiFi(app_name, app_pass, sucessFunction, errorFunction, static_IP)
-    wifiMaxConnectTime= 10;
-    counter = wifiMaxConnectTime*10;
+    wifiMaxConnectTime= 30; -- sec
+    counter = wifiMaxConnectTime*2;
 
     print("Setting up WIFI...")
     wifi.setmode(wifi.STATION)
