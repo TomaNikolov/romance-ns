@@ -21,7 +21,14 @@
         
     	<StackLayout row="3">
             <Label text="{{ displayName }}" />
-			<Label text="{{ items.length }}" />
+            <ListView class="listview" row="3" items="{{ items }}">
+                <ListView.itemTemplate>
+                	<StackLayout row="3">
+                        <Label text="{{ info }}" />
+                        <Label text="{{ currentValue }}" />
+                  	</StackLayout>
+                </ListView.itemTemplate>
+            </ListView>
         </StackLayout>
     </GridLayout>
 </Page>
