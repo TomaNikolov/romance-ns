@@ -120,6 +120,8 @@ var DeviceItem = (function (_super) {
                     return "\uf127";
                 case "humidity":
                     return "\uf15e";
+                case "pump":
+                    return "\uf10f";
                 default:
                     return "\uf14f";
             }

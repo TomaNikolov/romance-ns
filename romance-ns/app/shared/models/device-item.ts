@@ -89,12 +89,14 @@ export class DeviceItem extends observable.Observable {
         switch(this.mode){
             case "range" :
             	return "\uf10d";
-             case "toggle" :
+            case "toggle" :
             	return "\uf13e";
-             case "temp" :
+            case "temp" :
             	return "\uf127";
-             case "humidity" :
+            case "humidity" :
             	return "\uf15e";
+            case "pump" :
+                return "\uf10f"
             default:
             	return "\uf14f";
         }
