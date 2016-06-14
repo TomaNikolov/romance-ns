@@ -1,5 +1,4 @@
 var observable = require("data/observable");
-var dialogs = require("ui/dialogs");
 var observableArray = require("data/observable-array");
 var device_item_1 = require("../models/device-item");
 var master_item_1 = require("../models/master-item");
@@ -52,9 +51,11 @@ var DevicesViewModel = (function (_super) {
         });
     };
     DevicesViewModel.prototype.refreshDevice = function (device) {
-        var that = this, children = that.getDeviceDetails(device).items;
-        dialogs.alert(children.length);
-        device.set("items", children);
+        var that = this;
+        return that.getDeviceDetails(device)
+            .then(function (deviceDetails) {
+            device.set("items", deviceDetails.items);
+        });
     };
     DevicesViewModel.prototype.getDeviceDetails = function (newDeviceInfo) {
         return requester.get(newDeviceInfo.ipAddress)

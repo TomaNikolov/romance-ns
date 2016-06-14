@@ -70,12 +70,12 @@ class DevicesViewModel extends observable.Observable {
     }
 
 	refreshDevice(device:MasterItem) {
-        var that = this,
-            children = that.getDeviceDetails(device).items;
+        var that = this;
         
-        dialogs.alert(children.length);
-        
-        device.set("items", children);
+        return that.getDeviceDetails(device)
+        	.then(function(deviceDetails) {
+        		device.set("items", deviceDetails.items);
+        	});
     }
     
 	getDeviceDetails(newDeviceInfo: any) {
