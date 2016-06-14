@@ -26,8 +26,8 @@
             <Label text="Enter Device Name" class="label"></Label>
             <TextField text="{{ displayName }}" class="input" />
             
-            <Border class="border border--register">
-            	<Button text="Register" class="button" tap="onAddDevice"></Button>
+            <Border class="border border--connect">
+            	<Button text="Connect" class="button button--connect" tap="onAddDevice"></Button>
             </Border>
   		</StackLayout>
     </GridLayout>
