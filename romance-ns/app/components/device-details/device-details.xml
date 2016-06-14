@@ -24,6 +24,7 @@
             <ListView class="listview" row="3" items="{{ items }}">
                 <ListView.itemTemplate>
                 	<StackLayout row="3">
+                        <Label text="{{ actionIcon }}" cssClass="icon" />
                         <Label text="{{ info }}" />
                         <Label text="{{ currentValue }}" />
                   	</StackLayout>

@@ -4,7 +4,6 @@ import dialogs = require("ui/dialogs");
 
 export function get(url) {
     return new Promise(function (resolve, reject) {
-        dialogs.alert(url);
         http.request({
                 url: "http://" + url,
                 method: 'GET',
