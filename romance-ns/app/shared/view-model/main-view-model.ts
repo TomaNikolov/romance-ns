@@ -81,6 +81,10 @@ class DevicesViewModel extends observable.Observable {
 	getDeviceDetails(newDeviceInfo: any) {
          return requester.get(newDeviceInfo.ipAddress)
                 .then(function (response) {
+             		 _.forEach(response.actions, function(action) {
+                       	action.ipAddress = newDeviceInfo.ipAddress
+                    });
+             
                     var deviceInfo = {
                         guild: response.device,
                         displayName: newDeviceInfo.displayName,

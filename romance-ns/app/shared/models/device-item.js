@@ -1,6 +1,7 @@
 var action_type_1 = require("../enums/action-type");
 var action_mode_1 = require("../enums/action-mode");
 var observable = require("data/observable");
+var requester = require("./../requester");
 var DeviceItem = (function (_super) {
     __extends(DeviceItem, _super);
     function DeviceItem(fromObject) {
@@ -11,12 +12,14 @@ var DeviceItem = (function (_super) {
         this._kind = "";
         this._queryParam = "";
         this._currentValue = 0;
-        this._currentBoolValue = 0;
         this._minValue = Number.NaN;
         this._maxValue = Number.NaN;
+        this._ipAddress = "";
+        var that = this;
         for (var propertyName in fromObject) {
             this[propertyName] = fromObject[propertyName];
         }
+        that.addEventListener(observable.Observable.propertyChangeEvent, that.changeState.bind(that));
     }
     Object.defineProperty(DeviceItem.prototype, "type", {
         get: function () {
@@ -129,6 +132,28 @@ var DeviceItem = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(DeviceItem.prototype, "ipAddress", {
+        get: function () {
+            return this._ipAddress;
+        },
+        set: function (ipAddress) {
+            this._ipAddress = ipAddress;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    DeviceItem.prototype.changeState = function (pcd) {
+        var that = this;
+        if (pcd.propertyName == "currentValue" || pcd.propertyName == "currentBoolValue") {
+            var value = pcd.value;
+            if (pcd.propertyName == "currentBoolValue") {
+                value = value ? 1 : 0;
+            }
+            requester.get(that.ipAddress + "/set?" + that.queryParam + "=" + value.toString())
+                .then(function (response) {
+            });
+        }
+    };
     return DeviceItem;
 })(observable.Observable);
 exports.DeviceItem = DeviceItem;
