@@ -30,6 +30,7 @@
                     <Label text="{{ kind }}" col="2" row="1" opacity="0.5" fontSize="18" />
                     <Slider value="{{ currentValue }}" minValue="{{ min }}" maxValue="{{ max }}" col="2" row="4" cssClass="slider" visibility="{{ mode === 'range' ? 'visible': 'collapsed'}}"/>
                     <Switch col="2" row="4" checked="{{ currentBoolValue }}" cssClass="switch" visibility="{{ mode === 'toggle' ? 'visible': 'collapsed'}}"/>
+                    <Label text="{{ currentValue }}" visibility="{{ mode === 'humidity' || mode === 'temp' ? 'visible' : 'collapsed' }}" />
                 </GridLayout>
             </ListView.itemTemplate>
         </ListView>

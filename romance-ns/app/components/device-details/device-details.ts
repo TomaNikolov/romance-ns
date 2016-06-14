@@ -8,5 +8,7 @@ export function pageNavigatedTo(args: observable.EventData) {
 }
 
 export function onRefreshTap(args: observable.EventData) {
+    var page = < pages.Page > args.object;
     
+    vmModule.mainViewModel.refreshDevice(page.bindingContext);
 }

@@ -3,6 +3,8 @@ var ActionMode = (function () {
     }
     ActionMode.range = "range";
     ActionMode.toggle = "toggle";
+    ActionMode.temp = "temp";
+    ActionMode.humidity = "humidity";
     return ActionMode;
 })();
 exports.ActionMode = ActionMode;

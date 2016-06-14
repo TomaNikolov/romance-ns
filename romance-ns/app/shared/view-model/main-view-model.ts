@@ -68,8 +68,17 @@ class DevicesViewModel extends observable.Observable {
                 	});
         	});
     }
+
+	refreshDevice(device:MasterItem) {
+        var that = this,
+            children = that.getDeviceDetails(device).items;
+        
+        dialogs.alert(children.length);
+        
+        device.set("items", children);
+    }
     
-	getDeviceDetails(newDeviceInfo: NewDeviceItem) {
+	getDeviceDetails(newDeviceInfo: any) {
          return requester.get(newDeviceInfo.ipAddress)
                 .then(function (response) {
                     var deviceInfo = {

@@ -5,6 +5,8 @@ function pageNavigatedTo(args) {
 }
 exports.pageNavigatedTo = pageNavigatedTo;
 function onRefreshTap(args) {
+    var page = args.object;
+    vmModule.mainViewModel.refreshDevice(page.bindingContext);
 }
 exports.onRefreshTap = onRefreshTap;
 //# sourceMappingURL=device-details.js.map
